@@ -5,38 +5,75 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Manfred on Tour — Adventskalender</title>
   <style>
+    /* Blauer Farbverlauf als Hintergrund */
     body {
-      background: linear-gradient(180deg, #0f172a, #0b132b);
-      color: white;
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #0b132b, #0b172a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-family: system-ui, Arial, sans-serif;
-      text-align: center;
+      color: white;
+      flex-direction: column;
       padding: 24px;
+      box-sizing: border-box;
     }
-    h1 { margin-bottom: 24px; }
+    h1 {
+      margin-bottom: 24px;
+      font-weight: 600;
+      font-size: 2rem;
+      text-align: center;
+    }
     .grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-      justify-items: center;
-      max-width: 600px;
-      margin: auto;
+      grid-template-columns: repeat(6, 100px);
+      gap: 16px;
+      justify-content: center;
     }
     .door {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 10px;
-      padding: 24px;
-      font-size: 1.6rem;
-      text-decoration: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      width: 100px;
+      font-size: 2.25rem;
+      font-weight: 700;
       color: white;
-      transition: transform .2s;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
     }
     .door:hover {
-      background: #ff6b6b;
-      transform: translateY(-3px);
+      background: #1e40af;
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
     }
-    @media(max-width: 600px) {
-      .grid { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(3, 100px);
+        gap: 12px;
+      }
+      .door {
+        height: 90px;
+        width: 90px;
+        font-size: 1.8rem;
+      }
+    }
+    @media (max-width: 360px) {
+      .grid {
+        grid-template-columns: repeat(2, 90px);
+        gap: 10px;
+      }
+      .door {
+        height: 80px;
+        width: 80px;
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -44,34 +81,34 @@
   <h1>🎄 Manfred on Tour — Adventskalender 🎁</h1>
 
   <div class="grid">
-    <a class="door" href="133f1d8d4cddcad909ae48af817ce118.html">1</a>
-    <a class="door" href="d150db2de540bc17dc30905193be0dbe.html">2</a>
-    <a class="door" href="c937c2f511ef5e9a4ca34097431b84de.html">3</a>
-    <a class="door" href="5af3cf854c4e4fb32a035d6ce39482e6.html">4</a>
-    <a class="door" href="8ed99d5706d8f8945356cbdd2b8c8fbb.html">5</a>
-    <a class="door" href="bc8fb4076b554e913e3ecc1fbfb43ac5.html">6</a>
-    <a class="door" href="327886846975474703aa5330eb763137.html">7</a>
-    <a class="door" href="3ee9ed786e9aec12f5b5114cc6048a01.html">8</a>
-    <a class="door" href="670a87d6228750e165e4eb429acb8fb1.html">9</a>
-    <a class="door" href="64e3b98a30a5ec7cbc92a148dda15c59.html">10</a>
-    <a class="door" href="826ef9c41612df57d968341ff2bf5f92.html">11</a>
-    <a class="door" href="ed24b048739adf6e4bbeb288c694e2d8.html">12</a>
-    <a class="door" href="196a59aaf168f5d20c7380306aa3f2b4.html">13</a>
-    <a class="door" href="552029a203b00a7eecaef80232770614.html">14</a>
-    <a class="door" href="d34235885ee9364ddf5619832c0f72bd.html">15</a>
-    <a class="door" href="e1336c9214e461a6d635a23436d3bd5a.html">16</a>
-    <a class="door" href="04dacb247ef239841563b3319970df10.html">17</a>
-    <a class="door" href="fe1316815d562a3db7a5fa74c3463b4d.html">18</a>
-    <a class="door" href="b595e624ca8949acb866ef7aab9735a2.html">19</a>
-    <a class="door" href="4cc2f5402921c92e2ec0542981e639a2.html">20</a>
-    <a class="door" href="ac5776e318fc94abce275c7caddb6d4e.html">21</a>
-    <a class="door" href="eba74f0ce6a1cf38d7f8150df982fb12.html">22</a>
-    <a class="door" href="13762b46fc47541527b360c4a4f56f52.html">23</a>
-    <a class="door" href="cb36273e3f2454aeab9a0a52e6eb9268.html">24</a>
+    <a class="door" href="door_day1_4f9a7b6c8d.html">1</a>
+    <a class="door" href="door_day2_9a6c3e8b2d.html">2</a>
+    <a class="door" href="door_day3_1f7b3d8a6c.html">3</a>
+    <a class="door" href="door_day4_8c5f7a9d2b.html">4</a>
+    <a class="door" href="door_day5_7a6c2e3d8f.html">5</a>
+    <a class="door" href="door_day6_2e3d9a7b1c.html">6</a>
+    <a class="door" href="door_day7_5c8a2e1b9d.html">7</a>
+    <a class="door" href="door_day8_9b3f6d1a5c.html">8</a>
+    <a class="door" href="door_day9_6d9b1c3f7a.html">9</a>
+    <a class="door" href="door_day10_3e7a5d1b9c.html">10</a>
+    <a class="door" href="door_day11_8f4c2a7e9b.html">11</a>
+    <a class="door" href="door_day12_7e9b6d3c1a.html">12</a>
+    <a class="door" href="door_day13_1c3f7a9b6d.html">13</a>
+    <a class="door" href="door_day14_5a8d6f3c7b.html">14</a>
+    <a class="door" href="door_day15_9d2f5b7a1c.html">15</a>
+    <a class="door" href="door_day16_3b1a7c9e5d.html">16</a>
+    <a class="door" href="door_day17_6c5a8d1f3b.html">17</a>
+    <a class="door" href="door_day18_8a7d3c5b9e.html">18</a>
+    <a class="door" href="door_day19_4f9d1a7e6c.html">19</a>
+    <a class="door" href="door_day20_7e6b4f9a3d.html">20</a>
+    <a class="door" href="door_day21_9c2e5b7a1f.html">21</a>
+    <a class="door" href="door_day22_1b7f9d4c5a.html">22</a>
+    <a class="door" href="door_day23_3d5a8f7c1b.html">23</a>
+    <a class="door" href="door_day24_5f9a3b7d6e.html">24</a>
   </div>
 
   <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">
-    Tipp: Jeden Tag öffnet sich ein neues Türchen 🎅
+    One country a day 🎅
   </p>
 </body>
 </html>
