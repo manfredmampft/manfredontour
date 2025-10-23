@@ -119,6 +119,12 @@
       cursor: pointer;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
     }
+    .door.locked {
+      opacity: 0.3;
+      pointer-events: none;
+      filter: grayscale(50%);
+      cursor: default;
+    }
     @media (max-width: 600px) {
       .grid {
         grid-template-columns: repeat(3, 100px);
@@ -188,8 +194,42 @@
 
   <script>
     const sitePassword = "1612";
+    const disableLocking = false; // <--- true = Türchen nicht sperren (für Tests)
     const overlay = document.getElementById('pwOverlay');
     const calendar = document.getElementById('calendar');
+    const pwBtn = document.getElementById('pwBtn');
+    const pwInput = document.getElementById('pwInput');
+
+    // aktuelles Datum abrufen
+    const today = new Date().getDate();
+
+    const fileNames = [
+      "door_day1_4f9a7b6c8d.html",
+      "door_day2_9a6c3e8b2d.html",
+      "door_day3_1f7b3d8a6c.html",
+      "door_day4_8c5f7a9d2b.html",
+      "door_day5_7a6c2e3d8f.html",
+      "door_day6_2e3d9a7b1c.html",
+      "door_day7_5c8a2e1b9d.html",
+      "door_day8_9b3f6d1a5c.html",
+      "door_day9_6d9b1c3f7a.html",
+      "door_day10_3e7a5d1b9c.html",
+      "door_day11_8f4c2a7e9b.html",
+      "door_day12_7e9b6d3c1a.html",
+      "door_day13_1c3f7a9b6d.html",
+      "door_day14_5a8d6f3c7b.html",
+      "door_day15_9d2f5b7a1c.html",
+      "door_day16_3b1a7c9e5d.html",
+      "door_day17_6c5a8d1f3b.html",
+      "door_day18_8a7d3c5b9e.html",
+      "door_day19_4f9d1a7e6c.html",
+      "door_day20_7e6b4f9a3d.html",
+      "door_day21_9c2e5b7a1f.html",
+      "door_day22_1b7f9d4c5a.html",
+      "door_day23_3d5a8f7c1b.html",
+      "door_day24_5f9a3b7d6e.html"
+    ];
+
 
     function tryPw() {
       const v = document.getElementById('pwInput').value;
@@ -201,12 +241,33 @@
         alert("Ne, das Passwort stimmt nicht – versuch's nochmal 😄");
       }
     }
-
+    // Prüfen ob das Passwort schon gespeichert ist
     function checkStoredPw() {
       const savedPw = localStorage.getItem('adventPassword');
       if (savedPw === sitePassword) {
         overlay.style.display = 'none';
         calendar.style.display = 'grid';
+      }
+    }
+
+    // Kalender-Türchen rendern
+    function renderCalendar() {
+      calendar.innerHTML = "";
+      calendar.style.display = 'grid';
+
+      for (let i = 0; i < fileNames.length; i++) {
+        const a = document.createElement('a');
+        a.className = 'door';
+        a.textContent = i + 1;
+        a.href = fileNames[i];
+
+        if (!disableLocking && (i+1) > today) {
+          a.classList.add('locked');
+          a.removeAttribute('href');
+          a.title = `Öffnet erst am ${i}. Dezember`;
+        }
+
+        calendar.appendChild(a);
       }
     }
 
