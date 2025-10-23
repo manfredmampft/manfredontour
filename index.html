@@ -3,270 +3,75 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- Suchmaschinen bitten, diese Seite nicht zu indexieren -->
-  <meta name="robots" content="noindex, nofollow" />
   <title>Manfred on Tour — Adventskalender</title>
   <style>
-    :root{
-      --bg1:#0f172a; --bg2:#0b132b; --card:#ffffff; --accent:#ff6b6b;
+    body {
+      background: linear-gradient(180deg, #0f172a, #0b132b);
+      color: white;
+      font-family: system-ui, Arial, sans-serif;
+      text-align: center;
+      padding: 24px;
     }
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    body{
-      background: linear-gradient(180deg,var(--bg1),var(--bg2));
-      color: #fff; display:flex; align-items:center; justify-content:center; padding:24px;
+    h1 { margin-bottom: 24px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      justify-items: center;
+      max-width: 600px;
+      margin: auto;
     }
-    .wrap{max-width:1100px;width:100%;}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-    h1{margin:0;font-size:1.6rem}
-    .intro{opacity:.9;font-size:.95rem}
-    /* Password overlay */
-    #pwOverlay{
-      position:fixed; inset:0; background:rgba(2,6,23,0.9); display:flex;align-items:center;justify-content:center;z-index:60;
-      padding:24px; box-sizing:border-box;
+    .door {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 24px;
+      font-size: 1.6rem;
+      text-decoration: none;
+      color: white;
+      transition: transform .2s;
     }
-    .pwBox{background:linear-gradient(180deg,#0b1220,#0b1a2b);border-radius:12px;padding:28px;width:100%;max-width:480px;color:#fff;box-shadow:0 8px 30px rgba(0,0,0,.5)}
-    .pwBox h2{margin:0 0 10px}
-    .pwBox p{margin:0 0 18px;opacity:.9}
-    .pwRow{display:flex;gap:10px}
-    input[type="password"], input[type="text"]{
-      flex:1;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);color:#fff;
+    .door:hover {
+      background: #ff6b6b;
+      transform: translateY(-3px);
     }
-    button{background:var(--accent);border:none;padding:10px 14px;color:white;border-radius:8px;cursor:pointer;font-weight:600}
-    /* Calendar grid */
-    .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-    .door{
-      background:linear-gradient(180deg,#ffffff0f,#0000001a);padding:18px;border-radius:10px;min-height:110px;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;border:1px solid rgba(255,255,255,.05);
-      transition:transform .18s ease, box-shadow .18s;
-    }
-    .door.locked{opacity:.28;cursor:default;transform:scale(1);filter:grayscale(30%)}
-    .door.active{box-shadow:0 8px 30px rgba(0,0,0,.6);transform:translateY(-4px)}
-    .door .num{font-size:1.6rem;font-weight:700;color:#fff}
-    .door .hint{font-size:.85rem;margin-top:8px;opacity:.9;text-align:center}
-    .footer{margin-top:18px;color:#d1d5db;font-size:.9rem;opacity:.9}
-    /* modal */
-    .modal{position:fixed;inset:0;background:linear-gradient(rgba(2,6,23,.6),rgba(2,6,23,.85));display:none;align-items:center;justify-content:center;z-index:80;padding:20px}
-    .card{background:var(--card);color:#0c1724;border-radius:12px;padding:20px;max-width:820px;width:100%;box-shadow:0 20px 50px rgba(2,6,23,.6)}
-    .card h3{margin:0 0 8px}
-    .card p{margin:0 0 12px;color:#1f2937}
-    .closeBtn{position:absolute;top:14px;right:18px;background:#eee;border-radius:6px;padding:6px 8px;border:none;cursor:pointer}
-    .answerRow{display:flex;gap:10px;margin-top:8px}
-    input.answer{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e6e6}
-    .reveal{margin-top:12px;padding:12px;border-radius:8px;background:#f3f4f6;color:#111;border:1px solid #e9e9e9}
-    .images{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-    .images img{width:140px;height:100px;object-fit:cover;border-radius:8px;border:1px solid #ddd}
-    .small{font-size:.9rem;color:#374151}
-    @media(max-width:880px){
-      .grid{grid-template-columns:repeat(3,1fr)}
-    }
-    @media(max-width:420px){
-      .grid{grid-template-columns:repeat(2,1fr)}
+    @media(max-width: 600px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
 <body>
-  <!-- Passwort-Overlay -->
-  <div id="pwOverlay" aria-hidden="false">
-    <div class="pwBox" role="dialog" aria-modal="true">
-      <h2>Manfred on Tour — Adventskalender</h2>
-      <p>Gib das Tagespasswort ein, um den Kalender zu öffnen.<br><small>Du bekommst das Passwort von der Schenkenden Person.</small></p>
-      <div class="pwRow">
-        <input id="pwInput" type="password" placeholder="Passwort eingeben">
-        <button id="pwBtn">Öffnen</button>
-      </div>
-      <p style="margin-top:12px;font-size:.9rem;color:#d1d5db">Tipp: Du kannst das Passwort später in der Datei ändern (variable <code>sitePassword</code>).</p>
-    </div>
+  <h1>🎄 Manfred on Tour — Adventskalender 🎁</h1>
+
+  <div class="grid">
+    <a class="door" href="133f1d8d4cddcad909ae48af817ce118.html">1</a>
+    <a class="door" href="d150db2de540bc17dc30905193be0dbe.html">2</a>
+    <a class="door" href="c937c2f511ef5e9a4ca34097431b84de.html">3</a>
+    <a class="door" href="5af3cf854c4e4fb32a035d6ce39482e6.html">4</a>
+    <a class="door" href="8ed99d5706d8f8945356cbdd2b8c8fbb.html">5</a>
+    <a class="door" href="bc8fb4076b554e913e3ecc1fbfb43ac5.html">6</a>
+    <a class="door" href="327886846975474703aa5330eb763137.html">7</a>
+    <a class="door" href="3ee9ed786e9aec12f5b5114cc6048a01.html">8</a>
+    <a class="door" href="670a87d6228750e165e4eb429acb8fb1.html">9</a>
+    <a class="door" href="64e3b98a30a5ec7cbc92a148dda15c59.html">10</a>
+    <a class="door" href="826ef9c41612df57d968341ff2bf5f92.html">11</a>
+    <a class="door" href="ed24b048739adf6e4bbeb288c694e2d8.html">12</a>
+    <a class="door" href="196a59aaf168f5d20c7380306aa3f2b4.html">13</a>
+    <a class="door" href="552029a203b00a7eecaef80232770614.html">14</a>
+    <a class="door" href="d34235885ee9364ddf5619832c0f72bd.html">15</a>
+    <a class="door" href="e1336c9214e461a6d635a23436d3bd5a.html">16</a>
+    <a class="door" href="04dacb247ef239841563b3319970df10.html">17</a>
+    <a class="door" href="fe1316815d562a3db7a5fa74c3463b4d.html">18</a>
+    <a class="door" href="b595e624ca8949acb866ef7aab9735a2.html">19</a>
+    <a class="door" href="4cc2f5402921c92e2ec0542981e639a2.html">20</a>
+    <a class="door" href="ac5776e318fc94abce275c7caddb6d4e.html">21</a>
+    <a class="door" href="eba74f0ce6a1cf38d7f8150df982fb12.html">22</a>
+    <a class="door" href="13762b46fc47541527b360c4a4f56f52.html">23</a>
+    <a class="door" href="cb36273e3f2454aeab9a0a52e6eb9268.html">24</a>
   </div>
 
-  <div class="wrap" hidden id="mainWrap">
-    <header>
-      <div>
-        <h1>🎄 Manfred on Tour — 24 Länder</h1>
-        <div class="intro">Jeden Tag ein Land erraten — tippe den Ländernamen ein. Viel Spaß! 🧩</div>
-      </div>
-      <div class="small">Heute: <span id="todayLabel"></span></div>
-    </header>
-
-    <main>
-      <div class="grid" id="calendar"></div>
-      <div class="footer">Seite ist <strong>nicht indexiert</strong>. Link nur an den Beschenkten weitergeben. (Mehr: <em>robots.txt</em> empfehlen)</div>
-    </main>
-  </div>
-
-  <!-- Modal für Rätsel / Antwort -->
-  <div class="modal" id="modal">
-    <div class="card" id="card">
-      <button class="closeBtn" onclick="closeModal()">✕</button>
-      <h3 id="modalTitle">Rätsel</h3>
-      <p id="modalHint"></p>
-
-      <div id="formArea">
-        <div class="answerRow">
-          <input id="answerInput" class="answer" placeholder="Welches Land ist gemeint?">
-          <button onclick="checkAnswer()">Absenden</button>
-        </div>
-        <div style="margin-top:8px" class="small">Tipp: Schreib den Ländernamen (z.B. "Schweden" oder alternative Schreibweisen möglich).</div>
-      </div>
-
-      <div id="revealArea" style="display:none">
-        <div class="reveal" id="revealText"></div>
-        <div class="images" id="revealImages"></div>
-        <div style="margin-top:10px" class="small" id="revealChallenge"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    /**********************
-     * Konfiguration:
-     * - sitePassword: Passwort, das zum Öffnen der Website nötig ist
-     * - dayData: Hier legst du für jeden Tag die Rätsel, akzeptierten Antworten,
-     *   Auflösungs-Text, Challenges und Bildpfade an.
-     *
-     * Bearbeite die country/answers/ hint/ reveal / images-Felder.
-     **********************/
-    const sitePassword = "1612"; // <-- ÄNDERE DAS PASSWORT HIER
-    const dayData = {
-      // Nutze keys 1..24
-      1: {
-        country: "Deutschland",
-        hint: "Hier fing's an: Brezel, Bier und ein Multitalent namens 'Brötchen'.",
-        answers: ["deutschland","germany","bundesrepublik","d","federal republic of germany"],
-        reveal: "🇩🇪 Deutschland! Fun Fact: In Deutschland gibt es über 3000 Brotsorten. Challenge: Mach ein Foto von etwas typisch Deutschen heute.",
-        images: [] // z.B. "images/de-1.jpg"
-      },
-      2: { country:"Österreich", hint:"Alpen, Kaiserschmarrn und vielleicht ein Dirndl-Desaster.", answers:["österreich","oesterreich","austria"], reveal:"🇦🇹 Österreich — Erinnerungen an Berge & Apfelstrudel.", images:[]},
-      3: { country:"Tschechien", hint:"Altstadtlichter, Schlösser & ein Bier, das dich umhaut.", answers:["tschechien","czechia","czech republic"], reveal:"🇨🇿 Tschechien — Prag-Feeling!", images:[]},
-      4: { country:"Polen", hint:"Pierogi, Nikolaus-Feeling bald und nette Straßencafés.", answers:["polen","poland"], reveal:"🇵🇱 Polen — Mikołaj in Sicht!", images:[]},
-      5: { country:"Dänemark", hint:"Hygge, Kerzen & Fahrrad-Action.", answers:["dänemark","daenemark","denmark"], reveal:"🇩🇰 Dänemark — Fika-Cousin? Eher Hygge!", images:[]},
-      6: { country:"Niederlande", hint:"Flach, Tulpen, und Fahrräder über Fahrräder.", answers:["niederlande","holland","netherlands"], reveal:"🇳🇱 Niederlande — Mehr Bikes als Menschen!", images:[]},
-      7: { country:"Belgien", hint:"Waffeln, Bier & Schokolade. Schwer zu widerstehen.", answers:["belgien","belgium"], reveal:"🇧🇪 Belgien — Kalorienreich, aber glücklich.", images:[]},
-      8: { country:"Luxemburg", hint:"Klein, fein, irgendwie international.", answers:["luxemburg","luxembourg"], reveal:"🇱🇺 Luxemburg — Mini, aber oho!", images:[]},
-      9: { country:"Frankreich", hint:"Croissants, 'bonjour' und dramatische Kaffee-Rechnungen.", answers:["frankreich","france"], reveal:"🇫🇷 Frankreich — Baguette & Gesetzeskuriositäten.", images:[]},
-      10: { country:"England", hint:"Regenschirm, Fish & Chips und sehr britischer Humor.", answers:["england","grossbritannien","uk","united kingdom","great britain"], reveal:"🇬🇧 England — Tea time!", images:[]},
-      11: { country:"Norwegen", hint:"Fjorde, Schären & Nordlichtträume.", answers:["norwegen","norway"], reveal:"🇳🇴 Norwegen — Natur pur!", images:[]},
-      12: { country:"Finnland", hint:"Sauna, Seen und Lappland-Vibes.", answers:["finnland","finland"], reveal:"🇫🇮 Finnland — Saunazeit!", images:[]},
-      13: { country:"Schweden", hint:"Lucia, Lichter & Kanelbulle.", answers:["schweden","sweden"], reveal:"🇸🇪 Schweden — Lucia-Tag 🎶 (13.12.)", images:[]},
-      14: { country:"Portugal", hint:"Azulejos, Pastéis & Licht am Atlantik.", answers:["portugal"], reveal:"🇵🇹 Portugal — Sonnenflair.", images:[]},
-      15: { country:"Spanien", hint:"Tapas, Siesta & temperamentvolle Straßen.", answers:["spanien","spain"], reveal:"🇪🇸 Spanien — Olé!", images:[]},
-      16: { country:"Ägypten", hint:"Pyramiden, Kamele & Wüstenabenteuer.", answers:["ägypten","aegypten","egypt"], reveal:"🇪🇬 Ägypten — Sand & Sonne!", images:[]},
-      17: { country:"Albanien", hint:"Unentdeckte Strände & herzliche Menschen.", answers:["albanien","albania"], reveal:"🇦🇱 Albanien — Roadtrip-Vibes.", images:[]},
-      18: { country:"Nordmazedonien", hint:"Seen, Berge & kleines Balkan-Wunder.", answers:["nordmazedonien","north macedonia","north macedonia","macedonia"], reveal:"🇲🇰 Nordmazedonien — Erinnerungen an stille Seen.", images:[]},
-      19: { country:"Montenegro", hint:"Küste & Klippen, slow travel deluxe.", answers:["montenegro"], reveal:"🇲🇪 Montenegro — Meer & Ruhe.", images:[]},
-      20: { country:"Serbien", hint:"Lebendiges Nachtleben & starke Küche.", answers:["serbien","serbia"], reveal:"🇷🇸 Serbien — Gute Laune garantiert.", images:[]},
-      21: { country:"Kosovo", hint:"Kleine Hauptstadt, große Gastfreundschaft.", answers:["kosovo"], reveal:"🇽🇰 Kosovo — Herzlich & direkt.", images:[]},
-      22: { country:"Kroatien", hint:"Dalmatinische Küste & steinige Gassen.", answers:["kroatien","croatia"], reveal:"🇭🇷 Kroatien — Sonne & Meer.", images:[]},
-      23: { country:"Bosnien-Herzegowina", hint:"Mischung aus Orient & Alpen.", answers:["bosnien","bosnien-herzegowina","bosnia","bosnia and herzegovina"], reveal:"🇧🇦 Bosnien-Herzegowina — Herz & Geschichte.", images:[]},
-      24: { country:"Saarland", hint:"Kleine Region, große Geschichte — halb deutsch, halb frankophil.", answers:["saarland"], reveal:"🫶 Saarland — Unser finales Türchen. Frohe Weihnachten!", images:[]}
-    };
-
-    /**********************
-     * Ende Konfiguration
-     **********************/
-
-    // Hilfsfunktionen
-    function normalize(s){
-      if(!s) return "";
-      return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
-    }
-
-    // Datum vorbereiten (Tag des Monats)
-    const today = (new Date()).getDate();
-    document.getElementById('todayLabel').textContent = (new Date()).toLocaleDateString();
-
-    // Password-Handling
-    const overlay = document.getElementById('pwOverlay');
-    const mainWrap = document.getElementById('mainWrap');
-    document.getElementById('pwBtn').addEventListener('click', tryPw);
-    document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key === 'Enter') tryPw(); });
-
-    function tryPw(){
-      const v = document.getElementById('pwInput').value;
-      if(v === sitePassword){
-        overlay.style.display = 'none';
-        mainWrap.hidden = false;
-      } else {
-        alert("Ne, das Passwort stimmt nicht – versuch's nochmal 😄");
-      }
-    }
-
-    // Calendar rendern
-    const calendar = document.getElementById('calendar');
-    for(let i=1;i<=24;i++){
-      const d = document.createElement('div');
-      d.className = 'door';
-      d.dataset.day = i;
-      const num = document.createElement('div'); num.className='num'; num.textContent = i;
-      const hint = document.createElement('div'); hint.className='hint';
-      // kurze Vorschauhinweise (kannst du anpassen oder leer lassen)
-      hint.textContent = (dayData[i] && dayData[i].hint) ? dayData[i].hint.slice(0,60) + (dayData[i].hint.length>60?'…':'') : 'Rätsel öffnen';
-      d.appendChild(num); d.appendChild(hint);
-      // nur aktiv, wenn day <= today
-      if(i <= today){
-        d.classList.add('active');
-        d.addEventListener('click', ()=> openRiddle(i));
-      } else {
-        d.classList.add('locked');
-        d.title = `Öffnet am ${i}. Dezember`;
-      }
-      calendar.appendChild(d);
-    }
-
-    // Modal-Logik
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalHint = document.getElementById('modalHint');
-    const answerInput = document.getElementById('answerInput');
-    const revealArea = document.getElementById('revealArea');
-    const revealText = document.getElementById('revealText');
-    const revealImages = document.getElementById('revealImages');
-    const revealChallenge = document.getElementById('revealChallenge');
-    let currentDay = null;
-
-    function openRiddle(day){
-      currentDay = day;
-      const data = dayData[day];
-      modalTitle.textContent = `Türchen ${day} – Rätsel`;
-      modalHint.textContent = data && data.hint ? data.hint : "Rate das Land!";
-      answerInput.value = "";
-      revealArea.style.display = 'none';
-      document.getElementById('formArea').style.display = 'block';
-      modal.style.display = 'flex';
-      answerInput.focus();
-    }
-
-    function closeModal(){
-      modal.style.display = 'none';
-    }
-
-    function checkAnswer(){
-      const val = normalize(answerInput.value);
-      const data = dayData[currentDay];
-      if(!data){ alert("Kein Daten-Eintrag für diesen Tag – bitte kurz Bescheid geben."); return; }
-      const ok = data.answers.some(a => normalize(a) === val);
-      if(ok){
-        // richtige Antwort → zeigen
-        document.getElementById('formArea').style.display = 'none';
-        revealArea.style.display = 'block';
-        revealText.textContent = data.reveal || ("Richtig! " + data.country);
-        // Bilder (falls vorhanden)
-        revealImages.innerHTML = "";
-        if(data.images && data.images.length){
-          data.images.forEach(src=>{
-            const img = document.createElement('img'); img.src = src; revealImages.appendChild(img);
-          });
-        }
-        revealChallenge.textContent = data.challenge || "";
-      } else {
-        alert("Fast — denk nochmal nach oder probier eine andere Schreibweise 😉");
-      }
-    }
-
-    // Schließen per Escape oder Klick auf Hintergrund
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
-    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeModal(); });
-
-    // Wenn du willst: automatisch kleineren Hinweis einblenden (optional)
-  </script>
+  <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">
+    Tipp: Jeden Tag öffnet sich ein neues Türchen 🎅
+  </p>
 </body>
 </html>
