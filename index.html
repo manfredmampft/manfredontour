@@ -248,9 +248,11 @@
       if (savedPw === sitePassword) {
         overlay.style.display = 'none';
         renderCalendar();
+      } else {
+        overlay.style.display = 'flex';  // Wichtig, damit Overlay beim Laden sichtbar ist, falls kein Passwort gespeichert
+        calendar.style.display = 'none';  // Kalender verstecken
       }
     }
-
 
     // Kalender-Türchen rendern
     function renderCalendar() {
@@ -263,10 +265,10 @@
         a.textContent = i + 1;
         a.href = fileNames[i];
 
-        if (!disableLocking && (i+1) > today) {
+        if (!disableLocking && (i + 1) > today) {
           a.classList.add('locked');
           a.removeAttribute('href');
-          a.title = `Öffnet erst am ${i}. Dezember`;
+          a.title = `Öffnet erst am ${i+1}. Dezember`;
         }
 
         calendar.appendChild(a);
