@@ -5,19 +5,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Manfred on Tour — Adventskalender</title>
   <style>
-    /* Blauer Farbverlauf als Hintergrund */
+    :root {
+      --bg1: #0b132b;
+      --bg2: #0b172a;
+      --door-bg: rgba(255, 255, 255, 0.15);
+      --door-hover-bg: #1e40af;
+      --accent: #ff6b6b;
+    }
+    html,
     body {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(180deg, #0b132b, #0b172a);
+      height: 100%;
+      font-family: system-ui, Arial, sans-serif;
+      color: white;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: system-ui, Arial, sans-serif;
-      color: white;
-      flex-direction: column;
       padding: 24px;
       box-sizing: border-box;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
     }
     h1 {
       margin-bottom: 24px;
@@ -25,33 +36,88 @@
       font-size: 2rem;
       text-align: center;
     }
+    /* Passwort Overlay */
+    #pwOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 60;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .pwBox {
+      background: linear-gradient(180deg, #0b1220, #0b1a2b);
+      border-radius: 12px;
+      padding: 28px;
+      width: 100%;
+      max-width: 480px;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    .pwBox h2 {
+      margin: 0 0 10px;
+    }
+    .pwBox p {
+      margin: 0 0 18px;
+      opacity: 0.9;
+    }
+    .pwRow {
+      display: flex;
+      gap: 10px;
+    }
+    input[type="password"] {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+      font-size: 1rem;
+    }
+    button {
+      background: var(--accent);
+      border: none;
+      padding: 10px 14px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    /* Grid für Türchen */
     .grid {
       display: grid;
       grid-template-columns: repeat(6, 100px);
       gap: 16px;
       justify-content: center;
+      max-width: 680px;
+      width: 100%;
+      display: none; /* Versteckt bis Passwort eingegeben */
     }
     .door {
-      background: rgba(255, 255, 255, 0.15);
+      background: var(--door-bg);
       border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100px;
-      width: 100px;
       font-size: 2.25rem;
       font-weight: 700;
       color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-decoration: none;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       transition: background-color 0.3s ease, transform 0.2s ease;
       user-select: none;
     }
     .door:hover {
-      background: #1e40af;
+      background: var(--door-hover-bg);
       transform: scale(1.1);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
       cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
     }
     @media (max-width: 600px) {
       .grid {
@@ -60,7 +126,7 @@
       }
       .door {
         height: 90px;
-        width: 90px;
+        width: 100%;
         font-size: 1.8rem;
       }
     }
@@ -71,16 +137,33 @@
       }
       .door {
         height: 80px;
-        width: 80px;
+        width: 100%;
         font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <h1>🎄 Manfred on Tour — Adventskalender 🎁</h1>
+  <div id="pwOverlay" aria-hidden="false" role="dialog" aria-modal="true">
+    <div class="pwBox">
+      <h2>Manfred on Tour — Adventskalender</h2>
+      <p>
+        Gib das Tagespasswort ein, um den Kalender zu öffnen.<br />
+        <small>Du bekommst das Passwort von der Schenkenden Person.</small>
+      </p>
+      <div class="pwRow">
+        <input id="pwInput" type="password" placeholder="Passwort eingeben" autofocus />
+        <button id="pwBtn">Öffnen</button>
+      </div>
+      <p style="margin-top: 12px; font-size: 0.9rem; color: #d1d5db">
+        Tipp: Du kannst das Passwort später in der Datei ändern (variable <code>sitePassword</code>).
+      </p>
+    </div>
+  </div>
 
-  <div class="grid">
+  <h1>🎄 Manfred on Tour — One Country A Day 🎁</h1>
+
+  <div class="grid" id="calendar">
     <a class="door" href="door_day1_4f9a7b6c8d.html">1</a>
     <a class="door" href="door_day2_9a6c3e8b2d.html">2</a>
     <a class="door" href="door_day3_1f7b3d8a6c.html">3</a>
@@ -107,8 +190,27 @@
     <a class="door" href="door_day24_5f9a3b7d6e.html">24</a>
   </div>
 
-  <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">
-    One country a day 🎅
-  </p>
+  <script>
+    const sitePassword = "1612";
+
+    const overlay = document.getElementById("pwOverlay");
+    const calendar = document.getElementById("calendar");
+    const pwBtn = document.getElementById("pwBtn");
+    const pwInput = document.getElementById("pwInput");
+
+    function tryPw() {
+      if (pwInput.value === sitePassword) {
+        overlay.style.display = "none";
+        calendar.style.display = "grid";
+      } else {
+        alert("Ne, das Passwort stimmt nicht – versuch's nochmal 😄");
+      }
+    }
+
+    pwBtn.addEventListener("click", tryPw);
+    pwInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") tryPw();
+    });
+  </script>
 </body>
 </html>
