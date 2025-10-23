@@ -232,23 +232,25 @@
 
 
     function tryPw() {
-      const v = document.getElementById('pwInput').value;
+      const v = pwInput.value;
       if (v === sitePassword) {
         localStorage.setItem('adventPassword', v);
         overlay.style.display = 'none';
-        calendar.style.display = 'grid';
+        renderCalendar();
       } else {
         alert("Ne, das Passwort stimmt nicht – versuch's nochmal 😄");
       }
     }
-    // Prüfen ob das Passwort schon gespeichert ist
+
+    // Prüfen, ob das Passwort schon gespeichert ist
     function checkStoredPw() {
       const savedPw = localStorage.getItem('adventPassword');
       if (savedPw === sitePassword) {
         overlay.style.display = 'none';
-        calendar.style.display = 'grid';
+        renderCalendar();
       }
     }
+
 
     // Kalender-Türchen rendern
     function renderCalendar() {
