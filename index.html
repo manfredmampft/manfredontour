@@ -148,16 +148,12 @@
     <div class="pwBox">
       <h2>Manfred on Tour — Adventskalender</h2>
       <p>
-        Gib das Tagespasswort ein, um den Kalender zu öffnen.<br />
-        <small>Du bekommst das Passwort von der Schenkenden Person.</small>
+        Gib das Passwort ein, um den Kalender zu öffnen.<br />
       </p>
       <div class="pwRow">
         <input id="pwInput" type="password" placeholder="Passwort eingeben" autofocus />
         <button id="pwBtn">Öffnen</button>
       </div>
-      <p style="margin-top: 12px; font-size: 0.9rem; color: #d1d5db">
-        Tipp: Du kannst das Passwort später in der Datei ändern (variable <code>sitePassword</code>).
-      </p>
     </div>
   </div>
 
@@ -192,25 +188,33 @@
 
   <script>
     const sitePassword = "1612";
-
-    const overlay = document.getElementById("pwOverlay");
-    const calendar = document.getElementById("calendar");
-    const pwBtn = document.getElementById("pwBtn");
-    const pwInput = document.getElementById("pwInput");
+    const overlay = document.getElementById('pwOverlay');
+    const calendar = document.getElementById('calendar');
 
     function tryPw() {
-      if (pwInput.value === sitePassword) {
-        overlay.style.display = "none";
-        calendar.style.display = "grid";
+      const v = document.getElementById('pwInput').value;
+      if (v === sitePassword) {
+        localStorage.setItem('adventPassword', v);
+        overlay.style.display = 'none';
+        calendar.style.display = 'grid';
       } else {
         alert("Ne, das Passwort stimmt nicht – versuch's nochmal 😄");
       }
     }
 
-    pwBtn.addEventListener("click", tryPw);
-    pwInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") tryPw();
-    });
+    function checkStoredPw() {
+      const savedPw = localStorage.getItem('adventPassword');
+      if (savedPw === sitePassword) {
+        overlay.style.display = 'none';
+        calendar.style.display = 'grid';
+      }
+    }
+
+    pwBtn.addEventListener('click', tryPw);
+    pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(); });
+
+    checkStoredPw();
+
   </script>
 </body>
 </html>
