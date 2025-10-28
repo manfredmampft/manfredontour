@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Türchen 1 – Adventskalender</title>
   <style>
@@ -57,26 +57,8 @@
 </head>
 <body>
   <div class="card">
-    <h1>Türchen 1</h1>
-    <p>Aller Anfang ist leicht:</p>
-    <ul>
-      <li>(1.2, 6.4)</li>
-      <li>(4.0, 6.6)</li>
-      <li>(2.3, 7.9)</li>
-      <li>(3.4, 7.8)</li>
-      <li>(5.5, 6.9)</li>
-      <li>(8.1, 6.9)</li>
-      <li>(9.0, 4.2)</li>
-      <li>(5.9, 3.3)</li>
-      <li>(7.5, 1.6)</li>
-      <li>(6.8, 1.2)</li>
-      <li>(7.0, 0.8)</li>
-      <li>(5.1, 0.5)</li>
-      <li>(1.6, 0.6)</li>
-      <li>(2.4, 2.0)</li>
-      <li>(0.8, 2.3)</li>
-      <li>(0.1, 4.8)</li>
-    </ul>
+    <h1>Türchen 19</h1>
+    <p>Ін диесем Ланд соллте ман бессер кеин Вассер трıнкен.</p>
     <p>Welches Land ist gemeint?</p>
     <div class="answer-row">
       <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
@@ -91,10 +73,10 @@
   <script>
     function check() {
       const val = document.getElementById('answer').value.toLowerCase().trim();
-      const allowed = ["deutschland", "germany", "de"];
+      const allowed = ["serbien", "serbia", "rs"];
       if (allowed.includes(val)) {
         // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
-        window.location.href = "success_day1_7c3d2e8a1f.html"; // Passe die Erfolgsseite an!
+        window.location.href = "success_day19_3b5fdb28.html"; // Passe die Erfolgsseite an!
       } else {
         document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
       }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Türchen 1 – Adventskalender</title>
+  <style>
+    body {
+      background: linear-gradient(180deg, #0f172a, #0b132b);
+      color: white;
+      font-family: system-ui, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      color: #101020;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    h1 { margin-top: 0; }
+    input, button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .answer-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      justify-content: center;
+    }
+    p#feedback {
+      margin-top: 10px;
+      color: #ff6b6b;
+      min-height: 18px;
+    }
+    a.back-link {
+      display: block;
+      margin-top: 20px;
+      color: #ff6b6b;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+  <h1>Türchen 6</h1>
+  <p>Hier geht's los:</p>
+  
+  <!-- Das neue Grid BEGINN -->
+  <div class="grid-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 15px; margin: 25px 0;">
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Sibirien</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Bosporus</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Nil</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Pizza</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Ankara</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Wodka</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Vesuv</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Oase</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Kreml</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Pyramide</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Baklava</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Florenz</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Sphinx</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Gondel</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Zar</div>
+    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Hammam</div>
+  </div>
+  <!-- Das neue Grid ENDE -->
+
+    <p>Welches Land ist gemeint?</p>
+    <div class="answer-row">
+      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
+      <button onclick="check()">Absenden</button>
+    </div>
+
+    <p id="feedback" role="alert" aria-live="assertive"></p>
+
+    <a href="index.html" class="back-link">← Zurück zum Adventskalender</a>
+  </div>
+
+  <script>
+    function check() {
+      const val = document.getElementById('answer').value.toLowerCase().trim();
+      const allowed = ["ägypten", "egypt", "eg"];
+      if (allowed.includes(val)) {
+        // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
+        window.location.href = "success_day6_d2a9e745.html"; // Passe die Erfolgsseite an!
+      } else {
+        document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
+      }
+    }
+  </script>
+</body>
+</html>

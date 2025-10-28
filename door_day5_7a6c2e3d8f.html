@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Türchen 1 – Adventskalender</title>
+  <style>
+    body {
+      background: linear-gradient(180deg, #0f172a, #0b132b);
+      color: white;
+      font-family: system-ui, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      color: #101020;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    h1 { margin-top: 0; }
+    input, button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .answer-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      justify-content: center;
+    }
+    p#feedback {
+      margin-top: 10px;
+      color: #ff6b6b;
+      min-height: 18px;
+    }
+    a.back-link {
+      display: block;
+      margin-top: 20px;
+      color: #ff6b6b;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Türchen 5</h1>
+    <p>Wer braucht schon ein Motto oder Hinweise?</p>
+    <style>
+      .letter-grid {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 8px;
+        max-width: 480px;
+        margin: 20px auto;
+      }
+      .letter-cell {
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+        font-family: 'Arial Black', Arial, sans-serif;
+        user-select: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px 0;
+        background-color: #f9f9f9;
+      }
+    </style>
+
+    <div class="letter-grid">
+      <div class="letter-cell">T</div>
+      <div class="letter-cell">Y</div>
+      <div class="letter-cell">P</div>
+      <div class="letter-cell">E</div>
+      <div class="letter-cell">A</div>
+      <div class="letter-cell">T</div>
+      <div class="letter-cell">L</div>
+      <div class="letter-cell">O</div>
+
+      <div class="letter-cell">S</div>
+      <div class="letter-cell">I</div>
+      <div class="letter-cell">R</div>
+      <div class="letter-cell">T</div>
+      <div class="letter-cell">R</div>
+      <div class="letter-cell">Z</div>
+      <div class="letter-cell">I</div>
+      <div class="letter-cell">G</div>
+
+      <div class="letter-cell">O</div>
+      <div class="letter-cell">R</div>
+      <div class="letter-cell">E</div>
+      <div class="letter-cell">T</div>
+      <div class="letter-cell">P</div>
+      <div class="letter-cell">A</div>
+      <div class="letter-cell">P</div>
+      <div class="letter-cell">A</div>
+
+      <div class="letter-cell">M</div>
+      <div class="letter-cell">B</div>
+      <div class="letter-cell">S</div>
+      <div class="letter-cell">G</div>
+      <div class="letter-cell">O</div>
+      <div class="letter-cell">D</div>
+      <div class="letter-cell">O</div>
+      <div class="letter-cell">A</div>
+
+      <div class="letter-cell">E</div>
+      <div class="letter-cell">L</div>
+      <div class="letter-cell">U</div>
+      <div class="letter-cell">L</div>
+      <div class="letter-cell">S</div>
+      <div class="letter-cell">S</div>
+      <div class="letter-cell">E</div>
+      <div class="letter-cell">O</div>
+
+      <div class="letter-cell">N</div>
+      <div class="letter-cell">A</div>
+      <div class="letter-cell">T</div>
+      <div class="letter-cell">C</div>
+      <div class="letter-cell">H</div>
+      <div class="letter-cell">I</div>
+      <div class="letter-cell">P</div>
+      <div class="letter-cell">P</div>
+    </div>
+
+    <p>Welches Land ist gemeint?</p>
+    <div class="answer-row">
+      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
+      <button onclick="check()">Absenden</button>
+    </div>
+
+    <p id="feedback" role="alert" aria-live="assertive"></p>
+
+    <a href="index.html" class="back-link">← Zurück zum Adventskalender</a>
+  </div>
+
+  <script>
+    function check() {
+      const val = document.getElementById('answer').value.toLowerCase().trim();
+      const allowed = ["polen", "poland", "pl"];
+      if (allowed.includes(val)) {
+        // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
+        window.location.href = "success_day5_5e8c0fa2.html"; // Passe die Erfolgsseite an!
+      } else {
+        document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
+      }
+    }
+  </script>
+</body>
+</html>

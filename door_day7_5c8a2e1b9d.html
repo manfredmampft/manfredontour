@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Türchen 1 – Adventskalender</title>
+  <style>
+    body {
+      background: linear-gradient(180deg, #0f172a, #0b132b);
+      color: white;
+      font-family: system-ui, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      color: #101020;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    h1 { margin-top: 0; }
+    input, button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .answer-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      justify-content: center;
+    }
+    p#feedback {
+      margin-top: 10px;
+      color: #ff6b6b;
+      min-height: 18px;
+    }
+    a.back-link {
+      display: block;
+      margin-top: 20px;
+      color: #ff6b6b;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Türchen 7</h1>
+    <div class="grid-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 600px; margin: 20px auto;">
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Sibirien</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Bosporus</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Nil</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Pizza</div>
+      
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Ankara</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Wodka</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Vesuv</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Oase</div>
+
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Kreml</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Pyramide</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Baklava</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Florenz</div>
+
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Sphinx</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Gondel</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Zar</div>
+      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Hammam</div>
+    </div>
+
+    <p>Welches Land ist gemeint?</p>
+    <div class="answer-row">
+      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
+      <button onclick="check()">Absenden</button>
+    </div>
+
+    <p id="feedback" role="alert" aria-live="assertive"></p>
+
+    <a href="index.html" class="back-link">← Zurück zum Adventskalender</a>
+  </div>
+
+  <script>
+    function check() {
+      const val = document.getElementById('answer').value.toLowerCase().trim();
+      const allowed = ["norwegen", "norway", "no"];
+      if (allowed.includes(val)) {
+        // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
+        window.location.href = "success_day7_81f34b6c.html"; // Passe die Erfolgsseite an!
+      } else {
+        document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
+      }
+    }
+  </script>
+</body>
+</html>
