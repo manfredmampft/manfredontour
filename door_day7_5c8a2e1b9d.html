@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Türchen 1 – Adventskalender</title>
+  <title>Türchen 7 – Adventskalender</title>
   <style>
     body {
       background: linear-gradient(180deg, #0f172a, #0b132b);
@@ -53,36 +53,62 @@
     a.back-link:hover {
       text-decoration: underline;
     }
+    /* Gedicht: linksbündig mit Abstand zwischen Strophen */
+    .card p.poem-stanza {
+      text-align: left;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    /* Frage absetzen und zentrieren */
+    .card p.question {
+      margin-top: 40px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <h1>Türchen 7</h1>
-    <div class="grid-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 600px; margin: 20px auto;">
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Sibirien</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Bosporus</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Nil</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Pizza</div>
-      
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Ankara</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Wodka</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Vesuv</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Oase</div>
 
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Kreml</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Pyramide</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Baklava</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Florenz</div>
+    <p class="poem-stanza">
+      I have a nine to five job, that much is true,<br>
+      In a capital city, where the sun hides from view.<br>
+      Today at nine, I’m ready to start,<br>
+      But the sun’s still sleeping, it’s dark in my heart.
+    </p>
 
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Sphinx</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Gondel</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Zar</div>
-      <div class="grid-item" style="font-size: 1.5rem; font-weight: 700; background: #ffcc00; border-radius: 10px; padding: 16px; text-align: center; user-select: none;">Hammam</div>
-    </div>
+    <p class="poem-stanza">
+      By twenty past nine, the sun peeks a bit—<br>
+      Just enough light so I’m no longer in the pit.<br>
+      At ten, the world’s glimmering, but still quite low,<br>
+      No need for sunglasses, just a faint golden glow.
+    </p>
 
-    <p>Welches Land ist gemeint?</p>
+    <p class="poem-stanza">
+      Eleven rolls in, and the daylight’s still shy,<br>
+      The sun’s taking its time, drifting slowly up high.<br>
+      At twelve noon, it’s the brightest it’ll ever be—<br>
+      But just for a moment, before it will flee.<br>
+    </p>
+
+    <p class="poem-stanza">
+      One o’clock comes quickly, and sunlight’s still slight,<br>
+      Less than two hours total—it’s a short daily fight.<br>
+      By three fifteen, I would like to leave,<br>
+      The sun’s saying goodbye—it’s starting to grieve.
+    </p>
+
+    <p class="poem-stanza">
+      At five, quitting time, the city’s quite dark,<br>
+      No sunset in sight, just streetlamp’s bright spark.<br>
+      So guess this strange place with its brief daylight span,<br>
+      A city so special, it plays tricks with the sun’s plan.
+    </p>
+
+    <p class="question">In welchem Land bin ich heute?</p>
+
     <div class="answer-row">
-      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
+      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben" />
       <button onclick="check()">Absenden</button>
     </div>
 
@@ -96,8 +122,7 @@
       const val = document.getElementById('answer').value.toLowerCase().trim();
       const allowed = ["norwegen", "norway", "no"];
       if (allowed.includes(val)) {
-        // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
-        window.location.href = "success_day7_81f34b6c.html"; // Passe die Erfolgsseite an!
+        window.location.href = "success_day7_81f34b6c.html"; // Erfolgsseite
       } else {
         document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
       }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Türchen 1 – Adventskalender</title>
+  <title>Türchen 22 – Adventskalender</title>
   <style>
     body {
       background: linear-gradient(180deg, #0f172a, #0b132b);
@@ -53,29 +53,37 @@
     a.back-link:hover {
       text-decoration: underline;
     }
+
+    /* Die Zutatenliste linksbündig machen */
+    ul {
+      list-style-position: inside; /* optional, damit Bullet innen bleibt */
+      text-align: left;  /* Listentexte links ausrichten */
+      margin: 0 auto;    /* zentriert die kurze Liste im Container */
+      padding-left: 20px; /* Abstand zum linken Rand */
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Türchen 1</h1>
+    <h1>Türchen 22</h1>
     <h2>Ich bin dann mal am Backen ….</h2>
     <p><strong>Für 4 Personen</strong></p>
 
-      <h3>Zutaten</h3>
-      <ul>
-        <li>240 g weiche Butter</li>
-        <li>140 g Zucker</li>
-        <li>2 Päckchen Vanillezucker (optional)</li>
-        <li>4 Eier (Gr. M)</li>
-        <li>500 g Weizenmehl (Type 405; alternativ: Dinkelmehl Type 630)</li>
-        <li>2 TL Backpulver</li>
-        <li>700 ml Milch</li>
-        <li>2 Prisen Salz</li>
-        <li>Nach Belieben Puderzucker, Früchte oder Vanilleeis zum Garnieren</li>
-      </ul>
-    <p>Welches Land ist gemeint?</p>
+    <h3>Zutaten</h3>
+    <ul>
+      <li>240 g weiche Butter</li>
+      <li>140 g Zucker</li>
+      <li>2 Päckchen Vanillezucker (optional)</li>
+      <li>4 Eier (Gr. M)</li>
+      <li>500 g Weizenmehl (Type 405; alternativ: Dinkelmehl Type 630)</li>
+      <li>2 TL Backpulver</li>
+      <li>700 ml Milch</li>
+      <li>2 Prisen Salz</li>
+      <li>Nach Belieben Puderzucker, Früchte oder Vanilleeis zum Garnieren</li>
+    </ul>
+    <p>In welchem Land bin ich heute?</p>
     <div class="answer-row">
-      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
+      <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben" />
       <button onclick="check()">Absenden</button>
     </div>
 
@@ -89,8 +97,7 @@
       const val = document.getElementById('answer').value.toLowerCase().trim();
       const allowed = ["belgien", "belgium", "be"];
       if (allowed.includes(val)) {
-        // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
-        window.location.href = "success_day22_9c2be703.html"; // Passe die Erfolgsseite an!
+        window.location.href = "success_day22_9c2be703.html"; // Erfolgsseite
       } else {
         document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
       }

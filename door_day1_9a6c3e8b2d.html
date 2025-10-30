@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Türchen 16 – Adventskalender</title>
+  <title>Türchen 1 – Adventskalender</title>
   <style>
     body {
       background: linear-gradient(180deg, #0f172a, #0b132b);
@@ -25,6 +25,12 @@
       width: 100%;
       box-shadow: 0 8px 25px rgba(0,0,0,0.5);
       text-align: center;
+    }
+    .card ul,
+    .card ol {
+      text-align: left;
+      margin: 0 auto;
+      display: inline-block;
     }
     h1 { margin-top: 0; }
     input, button {
@@ -57,9 +63,27 @@
 </head>
 <body>
   <div class="card">
-    <h1>Türchen 16</h1>
-    <audio id="morseAudio" src="https://raw.githubusercontent.com/manfredmampft/manfredontour/main/morse_audio.wav"></audio>
-    <button onclick="document.getElementById('morseAudio').play()">Audio abspielen</button>
+    <h1>Türchen 1</h1>
+     <h2>Burek</h2>
+    <h3>Zutaten</h3>
+    <ul>
+      <li>500 g Blätterteig</li>
+      <li>300 g Hackfleisch (Rind oder gemischt)</li>
+      <li>1 Zwiebel, fein gehackt</li>
+      <li>100 g Schafskäse (optional)</li>
+      <li>Salz, Pfeffer, Paprika nach Geschmack</li>
+      <li>Etwas Olivenöl oder Butter zum Beträufeln</li>
+    </ul>
+
+    <h3>Anleitung</h3>
+    <ol>
+      <li>Backofen 8 Minuten auf 45 Grad vorheizen.</li>
+      <li>Zwiebeln glasig dünsten, Hackfleisch dazugeben und anbraten. Mit Salz, Pfeffer und Paprika würzen.</li>
+      <li>Blätterteig auslegen und die Hackfleischmischung gleichmäßig darauf verteilen. Nach Belieben Schafskäse darüber bröseln.</li>
+      <li>Den Teig vorsichtig rollen oder schichten.</li>
+      <li>Burek in eine gefettete Backform legen, mit etwas Olivenöl beträufeln.</li>
+      <li>Im Ofen bei 15 Grad 9 Minuten backen, bis der Teig goldbraun und knusprig ist.</li>
+    </ol>
     <p>In welchem Land bin ich heute?</p>
     <div class="answer-row">
       <input id="answer" placeholder="Antwort eingeben" aria-label="Antwort eingeben">
@@ -74,10 +98,10 @@
   <script>
     function check() {
       const val = document.getElementById('answer').value.toLowerCase().trim();
-      const allowed = ["bosnien und herzegowina", "bosnia and herzegovina", "ba", "bosnia"];
+      const allowed = ["kroatien", "croatia", "hr"];
       if (allowed.includes(val)) {
         // Erfolgsseite oder Text anzeigen – hier Beispiel Weiterleitung
-        window.location.href = "success_day16_b34caf09.html"; // Passe die Erfolgsseite an!
+        window.location.href = "success_day1_7c3e5d89.html"; // Passe die Erfolgsseite an!
       } else {
         document.getElementById('feedback').textContent = "Fast! Versuch es nochmal 😊";
       }
