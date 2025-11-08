@@ -15,20 +15,13 @@
     html,
     body {
       margin: 0;
-      height: 100%;
       font-family: system-ui, Arial, sans-serif;
       color: white;
       background: linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       padding: 24px;
       box-sizing: border-box;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
+      overflow-y: auto;
     }
     h1 {
       margin-bottom: 24px;
@@ -127,7 +120,7 @@
     }
     @media (max-width: 600px) {
       .grid {
-        grid-template-columns: repeat(3, 100px);
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
         gap: 12px;
       }
       .door {
