@@ -87,6 +87,40 @@
         font-size: 1rem;
       }
     }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .grid-item {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: #ffcc00;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    /* 🔽 Responsive grid behavior */
+    @media (max-width: 900px) {
+      .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -96,22 +130,22 @@
   
   <!-- Das neue Grid BEGINN -->
   <div class="grid-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 15px; margin: 25px 0;">
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Sibirien</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Bosporus</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Nil</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Pizza</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Ankara</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Wodka</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Vesuv</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Oase</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Kreml</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Pyramide</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Baklava</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Florenz</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Sphinx</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Gondel</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Zar</div>
-    <div class="grid-item" style="font-size:1.5rem;font-weight:700;background:#ffcc00;padding:16px;border-radius:10px;">Hammam</div>
+    <div class="grid-item">Sibirien</div>
+    <div class="grid-item">Bosporus</div>
+    <div class="grid-item">Nil</div>
+    <div class="grid-item">Pizza</div>
+    <div class="grid-item">Ankara</div>
+    <div class="grid-item">Wodka</div>
+    <div class="grid-item">Vesuv</div>
+    <div class="grid-item">Oase</div>
+    <div class="grid-item">Kreml</div>
+    <div class="grid-item">Pyramide</div>
+    <div class="grid-item">Baklava</div>
+    <div class="grid-item">Florenz</div>
+    <div class="grid-item">Sphinx</div>
+    <div class="grid-item">Gondel</div>
+    <div class="grid-item">Zar</div>
+    <div class="grid-item">Hammam</div>
   </div>
   <!-- Das neue Grid ENDE -->
 
