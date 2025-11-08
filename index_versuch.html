@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manfred on Tour — Adventskalender</title>
+  <style>
+    :root {
+      --bg1: #0b132b;
+      --bg2: #0b172a;
+      --door-bg: rgba(255, 255, 255, 0.15);
+      --door-hover-bg: #1e40af;
+      --accent: #ff6b6b;
+    }
+    
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: system-ui, Arial, sans-serif;
+      color: white;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      box-sizing: border-box;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+      font-weight: 600;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    /* Passwort Overlay */
+    #pwOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 60;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .pwBox {
+      background: linear-gradient(180deg, #0b1220, #0b1a2b);
+      border-radius: 12px;
+      padding: 28px;
+      width: 100%;
+      max-width: 480px;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .pwBox h2 {
+      margin: 0 0 10px;
+    }
+
+    .pwBox p {
+      margin: 0 0 18px;
+      opacity: 0.9;
+    }
+
+    .pwRow {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="password"] {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      padding: 10px 14px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Grid für Türchen */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 100px);
+      gap: 16px;
+      justify-content: center;
+      max-width: 680px;
+      width: 100%;
+      display: none; /* Versteckt bis Passwort eingegeben */
+    }
+
+    .door {
+      background: var(--door-bg);
+      border-radius: 12px;
+      height: 100px;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+
+    .door:hover {
+      background: var(--door-hover-bg);
+      transform: scale(1.1);
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .door.locked {
+      opacity: 0.3;
+      pointer-events: none;
+      filter: grayscale(50%);
+      cursor: default;
+    }
+
+    /* Mobile-first improvements */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .pwBox {
+        max-width: 95%;
+        padding: 16px;
+        font-size: 1rem;
+      }
+
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .door {
+        min-height: 80px;
+        font-size: 1.75rem;
+        padding: 14px 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 8px;
+      }
+
+      .pwBox {
+        max-width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .door {
+        min-height: 70px;
+        font-size: 1.5rem;
+        padding: 14px 0;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .door {
+        min-height: 60px;
+        font-size: 1.25rem;
+        padding: 12px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="pwOverlay" aria-hidden="false" role="dialog" aria-modal="true">
+    <div class="pwBox">
+      <h2>Manfred on Tour — Adventskalender</h2>
+      <p>
+        Gib das Passwort ein, um den Kalender zu öffnen.<br />
+      </p>
+      <div class="pwRow">
+        <input id="pwInput" type="password" placeholder="Passwort eingeben" autofocus />
+        <button id="pwBtn">Öffnen</button>
+      </div>
+    </div>
+  </div>
+
+  <h1>🎄 Manfred on Tour — One Country A Day 🎁</h1>
+
+  <div class="grid" id="calendar">
+    <a class="door" href="door_day1_9a6c3e8b2d.html">2</a>
+    <a class="door" href="door_day2_4f9a7b6c8d.html">1</a>
+    <a class="door" href="door_day3_1f7b3d8a6c.html">3</a>
+    <a class="door" href="door_day4_8c5f7a9d2b.html">4</a>
+    <a class="door" href="door_day5_7a6c2e3d8f.html">5</a>
+    <a class="door" href="door_day6_2e3d9a7b1c.html">6</a>
+    <a class="door" href="door_day7_5c8a2e1b9d.html">7</a>
+    <a class="door" href="door_day8_9b3f6d1a5c.html">8</a>
+    <a class="door" href="door_day9_6d9b1c3f7a.html">9</a>
+    <a class="door" href="door_day10_3e7a5d1b9c.html">10</a>
+    <a class="door" href="door_day11_8f4c2a7e9b.html">11</a>
+    <a class="door" href="door_day12_7e9b6d3c1a.html">12</a>
+    <a class="door" href="door_day13_1c3f7a9b6d.html">13</a>
+    <a class="door" href="door_day14_5a8d6f3c7b.html">14</a>
+    <a class="door" href="door_day15_9d2f5b7a1c.html">15</a>
+    <a class="door" href="door_day16_3b1a7c9e5d.html">16</a>
+    <a class="door" href="door_day17_6c5a8d1f3b.html">17</a>
+    <a class="door" href="door_day18_8a7d3c5b9e.html">18</a>
+    <a class="door" href="door_day19_4f9d1a7e6c.html">19</a>
+    <a class="door" href="door_day20_7e6b4f9a3d.html">20</a>
+    <a class="door" href="door_day21_9c2e5b7a1f.html">21</a>
+    <a class="door" href="door_day22_1b7f9d4c5a.html">22</a>
+    <a class="door" href="door_day23_3d5a8f7c1b.html">23</a>
+    <a class="door" href="door_day24_5f9a3b7d6e.html">24</a>
+  </div>
+
+  <script>
+    const sitePassword = "1612";
+    const disableLocking = true; // <--- true = Türchen nicht sperren (für Tests)
+    const overlay = document.getElementById('pwOverlay');
+    const calendar = document.getElementById('calendar');
+    const pwBtn = document.getElementById('pwBtn');
+    const pwInput = document.getElementById('pwInput');
+
+    // aktuelles Datum abrufen
+    const today = new Date().getDate();
+
+    const fileNames = [
+      "door_day1_9a6c3e8b2d.html",
+      "door_day2_4f9a7b6c8d.html",
+      "door_day3_1f7b3d8a6c.html",
+      "door_day4_8c5f7a9d2b.html",
+      "door_day5_7a6c2e3d8f.html",
+      "door_day6_2e3d9a7b1c.html",
+      "door_day7_5c8a2e1b9d.html",
+      "door_day8_9b3f6d1a5c.html",
+      "door_day9_6d9b1c3f7a.html",
+      "door_day10_3e7a5d1b9c.html",
+      "door_day11_8f4c2a7e9b.html",
+      "door_day12_7e9b6d3c1a.html",
+      "door_day13_1c3f7a9b6d.html",
+      "door_day14_5a8d6f3c7b.html",
+      "door_day15_9d2f5b7a1c.html",
+      "door_day16_3b1a7c9e5d.html",
+      "door_day17_6c5a8d1f3b.html",
+      "door_day18_8a7d3c5b9e.html",
+      "door_day19_4f9d1a7e6c.html",
+      "door_day20_7e6b4f9a3d.html",
+      "door_day21_9c2e5b7a1f.html",
+      "door_day22_1b7f9d4c5a.html",
+      "door_day23_3d5a8f7c1b.html",
+      "door_day24_5f9a3b7d6e.html"
+    ];
+
+
+    function tryPw() {
+      const v = pwInput.value;
+      if (v === sitePassword) {
+        localStorage.setItem('adventPassword', v);
+        overlay.style.display = 'none';
+        renderCalendar();
+      } else {
+        alert("Ne, das Passwort stimmt nicht – versuch's nochmal 😄");
+      }
+    }
+
+    // Prüfen, ob das Passwort schon gespeichert ist
+    function checkStoredPw() {
+      const savedPw = localStorage.getItem('adventPassword');
+      if (savedPw === sitePassword) {
+        overlay.style.display = 'none';
+        renderCalendar();
+      } else {
+        overlay.style.display = 'flex';  // Wichtig, damit Overlay beim Laden sichtbar ist, falls kein Passwort gespeichert
+        calendar.style.display = 'none';  // Kalender verstecken
+      }
+    }
+
+    // Kalender-Türchen rendern
+    function renderCalendar() {
+      calendar.innerHTML = "";
+      calendar.style.display = 'grid';
+
+      for (let i = 0; i < fileNames.length; i++) {
+        const a = document.createElement('a');
+        a.className = 'door';
+        a.textContent = i + 1;
+        a.href = fileNames[i];
+
+        if (!disableLocking && (i + 1) > today) {
+          a.classList.add('locked');
+          a.removeAttribute('href');
+          a.title = `Öffnet erst am ${i+1}. Dezember`;
+        }
+
+        calendar.appendChild(a);
+      }
+    }
+
+    pwBtn.addEventListener('click', tryPw);
+    pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(); });
+
+    checkStoredPw();
+
+  </script>
+</body>
+</html>
